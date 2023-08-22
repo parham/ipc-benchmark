@@ -1,0 +1,5 @@
+
+### Installing Boost library
+
+sudo apt-get install libboost-all-dev
+
