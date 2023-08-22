@@ -27,7 +27,7 @@ public:
         status_(false),
         name_(std::move(title)),
         mode_(mode){}
-    ~AbstractIPC();
+    ~AbstractIPC() = default;
 
     IPCMode getMode() {return mode_;}
     std::string getName() {return this->name_;}
