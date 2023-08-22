@@ -5,6 +5,7 @@ A comparative analysis of IPC methods for embedded applications.
 In this study, a series of state-of-the-art IPC methods are considered for this comparative analysis,
 
 - ZeroMQ
+- Redis
 - Unix socket
 - Pipes
 - Message Queues
