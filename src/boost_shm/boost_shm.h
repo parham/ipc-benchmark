@@ -8,11 +8,13 @@
 #include <boost/interprocess/mapped_region.hpp>
 #include <utility>
 
+namespace shm_boost = boost::interprocess;
+
 class BoostSharedMemory : public AbstractIPC {
 private:
     size_d containerSize;
-    shared_memory_object * sharedMemory{};
-    mapped_region * regionMemory{};
+    shm_boost::shared_memory_object * sharedMemory{};
+    shm_boost::mapped_region * regionMemory;
 
 public:
     BoostSharedMemory(std::string title, IPCMode mode, size_d csize) : AbstractIPC(std::move(title), mode), containerSize(csize) {}

@@ -1,8 +1,6 @@
 
 #include "boost_shm.h"
 
-using namespace boost::interprocess;
-
 BoostSharedMemory::~BoostSharedMemory() {
     if (this->getStatus()) {
         delete sharedMemory;
@@ -26,28 +24,28 @@ retcode_ BoostSharedMemory::initialize() {
     }
     // Create a shared memory segment. Throws if already created
     if (this->getMode() == Server) {
-        sharedMemory = new shared_memory_object(
-            open_or_create,
+        sharedMemory = new shm_boost::shared_memory_object(
+            shm_boost::open_or_create,
             this->getName().c_str(), //name
-            read_write
+            shm_boost::read_write
         );
         // Set the size of shared memory
         sharedMemory->truncate(containerSize);
         // Region for shared memory
-        regionMemory = new mapped_region(
-            sharedMemory,
-            read_write
+        regionMemory = new shm_boost::mapped_region(
+            *sharedMemory,
+            shm_boost::read_write
         );
     } else if (this->getMode() == Client) {
-        sharedMemory = new shared_memory_object(
-            open_only,  //open or create
+        sharedMemory = new shm_boost::shared_memory_object(
+            shm_boost::open_only,  //open or create
             this->getName().c_str(), //name
-            read_only
+            shm_boost::read_only
         );
         // Region for shared memory
-        regionMemory = new mapped_region(
-            sharedMemory,
-            read_only
+        regionMemory = new shm_boost::mapped_region(
+            *sharedMemory,
+            shm_boost::read_only
         );
     }
 

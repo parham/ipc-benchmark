@@ -61,11 +61,14 @@ endif ()
 # ---------------------------------
 
 # Test for Boost shared memory
-add_executable(test_boost_shm tests/test_boost_shm.cpp)
+add_executable(test_boost_shm tests/test_boost_shm_3.cpp)
 target_link_libraries(test_boost_shm ${Boost_LIBRARIES} -lrt)
 
 add_executable(test_boost_shm_2 tests/test_boost_shm_2.cpp)
 target_link_libraries(test_boost_shm_2 ${Boost_LIBRARIES} -lrt)
+
+add_executable(test_boost_shm_3 tests/test_boost_shm_3.cpp)
+target_link_libraries(test_boost_shm_3 ${Boost_LIBRARIES} -lrt)
 
 # enable testing functionality
 enable_testing()
@@ -74,6 +77,10 @@ add_test(
     COMMAND $<TARGET_FILE:test_boost_shm>
 )
 add_test(
-        NAME test_boost_shm_2
-        COMMAND $<TARGET_FILE:test_boost_shm_2>
+    NAME test_boost_shm_2
+    COMMAND $<TARGET_FILE:test_boost_shm_2>
+)
+add_test(
+    NAME test_boost_shm_3
+    COMMAND $<TARGET_FILE:test_boost_shm_3>
 )
