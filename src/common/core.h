@@ -10,14 +10,16 @@
 #define NOT_INITIALIZED 2
 #define NOT_ALLOWED 3
 
-typedef uint _retcode;
-
 typedef enum {
     Server,
     Client
 } IPCMode;
 
-template <typename MessageType> class AbstractIPC {
+typedef uint retcode_;
+typedef void * DataPtr_;
+typedef uint size_d;
+
+class AbstractIPC {
 private:
     bool status_;
     std::string name_;
@@ -31,14 +33,14 @@ public:
 
     IPCMode getMode() {return mode_;}
     std::string getName() {return this->name_;}
-    bool getStatus() {return this->status_;}
+    [[nodiscard]] bool getStatus() const {return this->status_;}
     void setStatus(bool status) {this->status_ = status;}
 
-
-    virtual _retcode initialize() = 0;
-    virtual _retcode terminate() = 0;
-    virtual _retcode update(const MessageType & data) = 0;
-    virtual _retcode get(MessageType & data) = 0;
+public:
+    virtual retcode_ initialize() = 0;
+    virtual retcode_ terminate() = 0;
+    virtual retcode_ update(DataPtr_ data) = 0;
+    virtual retcode_ get(DataPtr_ data) = 0;
 };
 
 #endif //PHM_BENCHMARK_CORE_H
