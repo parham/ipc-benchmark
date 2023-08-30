@@ -17,15 +17,14 @@ class NamedPipe : public AbstractIPC {
 private:
     size_d containerSize;
     fs::path pipPath;
-    int pipFID;
+    int pipFID{};
 
 public:
-    NamedPipe(std::string name, IPCMode mode, size_d csize) : AbstractIPC(name, mode), containerSize(csize) {
+    NamedPipe(std::string name, IPCMode mode, size_d csize) : AbstractIPC(std::move(name), mode), containerSize(csize) {
         fs::path dir (NAMED_PIPE_DIR);
         fs::path file (this->getName());
         this->pipPath = dir / file;
     }
-    ~NamedPipe();
 
 protected:
     retcode_ initializeImpl_() override;

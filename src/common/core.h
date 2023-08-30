@@ -12,6 +12,7 @@
 #define FIFO_CREATE_FAILED 4
 #define WRITING_FAILED 5
 #define READING_FAILED 6
+#define SOCKET_CREATION_FAILED 7
 
 typedef enum {
     Server,

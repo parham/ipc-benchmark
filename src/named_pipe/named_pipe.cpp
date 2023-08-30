@@ -5,10 +5,6 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-NamedPipe::~NamedPipe() {
-    // Empty body
-}
-
 retcode_ NamedPipe::initializeImpl_() {
     if (this->getMode() == Server) {
         int fid = mkfifo(pipPath.c_str(), 0666);
