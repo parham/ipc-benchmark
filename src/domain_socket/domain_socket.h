@@ -3,8 +3,10 @@
 #define IPC_BENCHMARK_DOMAIN_SOCKET_H
 
 #include <unistd.h>
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <cstdio>
 
 #include <common/core.h>
 

@@ -45,7 +45,7 @@ message(STATUS " - Libraries: ${Boost_LIBRARY_DIRS}")
 message(STATUS " - Definitions: ${Boost_DEFINITIONS}")
 
 add_library(
-    ${PROJECT_NAME} STATIC
+    ${PROJECT_NAME}
     ${PHM_IPC_MODULE_HR}
     ${PHM_IPC_MODULE_SRC}
 )

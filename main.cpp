@@ -51,7 +51,7 @@ int main (int argc, char* argv []) {
         } else if (method == "named_pipe") {
             obj = std::unique_ptr<AbstractIPC>(new NamedPipe("phm_test", IPCMode::Client, packetSize));
         } else if (method == "domain_socket") {
-            obj = std::unique_ptr<AbstractIPC>(new UnixDomainSocket("phm_test", IPCMode::Server, packetSize));
+            obj = std::unique_ptr<AbstractIPC>(new UnixDomainSocket("phm_test", IPCMode::Client, packetSize));
         }
         if ((sts = obj->initialize()) != SUCCESS_RET) {
             std::cerr << "CLIENT: INITIALIZATION is failed" << std::endl;
