@@ -17,6 +17,8 @@ set(CMAKE_CXX_COMPILER "g++")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-D_GNU_SOURCE)
 
+add_compile_definitions(NAMED_PIPE_DIR="/var/lock/")
+
 # Initialize the result directory
 file(MAKE_DIRECTORY ${PROJECT_SOURCE_DIR}/results)
 
@@ -61,26 +63,12 @@ endif ()
 # ---------------------------------
 
 # Test for Boost shared memory
-add_executable(test_boost_shm tests/test_boost_shm_3.cpp)
+add_executable(test_boost_shm tests/test_boost_shm.cpp)
 target_link_libraries(test_boost_shm ${Boost_LIBRARIES} -lrt)
-
-add_executable(test_boost_shm_2 tests/test_boost_shm_2.cpp)
-target_link_libraries(test_boost_shm_2 ${Boost_LIBRARIES} -lrt)
-
-add_executable(test_boost_shm_3 tests/test_boost_shm_3.cpp)
-target_link_libraries(test_boost_shm_3 ${Boost_LIBRARIES} -lrt)
 
 # enable testing functionality
 enable_testing()
 add_test(
     NAME test_boost_shm
     COMMAND $<TARGET_FILE:test_boost_shm>
-)
-add_test(
-    NAME test_boost_shm_2
-    COMMAND $<TARGET_FILE:test_boost_shm_2>
-)
-add_test(
-    NAME test_boost_shm_3
-    COMMAND $<TARGET_FILE:test_boost_shm_3>
 )

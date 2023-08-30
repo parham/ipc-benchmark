@@ -9,6 +9,9 @@
 #define ALREADY_INITIALIZED 1
 #define NOT_INITIALIZED 2
 #define NOT_ALLOWED 3
+#define FIFO_CREATE_FAILED 4
+#define WRITING_FAILED 5
+#define READING_FAILED 6
 
 typedef enum {
     Server,
@@ -37,10 +40,16 @@ public:
     void setStatus(bool status) {this->status_ = status;}
 
 public:
-    virtual retcode_ initialize() = 0;
-    virtual retcode_ terminate() = 0;
-    virtual retcode_ update(DataPtr_ data) = 0;
-    virtual retcode_ get(DataPtr_ data) = 0;
+    retcode_ initialize();
+    retcode_ terminate();
+    retcode_ update(DataPtr_ data);
+    retcode_ get(DataPtr_ data);
+
+protected:
+    virtual retcode_ initializeImpl_() = 0;
+    virtual retcode_ terminateImpl_() = 0;
+    virtual retcode_ updateImpl_(DataPtr_ data) = 0;
+    virtual retcode_ getImpl_(DataPtr_ data) = 0;
 };
 
 #endif //PHM_BENCHMARK_CORE_H

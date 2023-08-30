@@ -8,20 +8,12 @@ BoostSharedMemory::~BoostSharedMemory() {
     }
 }
 
-retcode_ BoostSharedMemory::terminate() {
-    if (!this->getStatus()) {
-        return NOT_INITIALIZED;
-    }
-    this->setStatus(false);
+retcode_ BoostSharedMemory::terminateImpl_() {
     sharedMemory->remove(this->getName().c_str());
-
     return SUCCESS_RET;
 }
 
-retcode_ BoostSharedMemory::initialize() {
-    if (this->getStatus()) {
-        return ALREADY_INITIALIZED;
-    }
+retcode_ BoostSharedMemory::initializeImpl_() {
     // Create a shared memory segment. Throws if already created
     if (this->getMode() == Server) {
         sharedMemory = new shm_boost::shared_memory_object(
@@ -49,28 +41,16 @@ retcode_ BoostSharedMemory::initialize() {
         );
     }
 
-    // Set the status to alive
-    this->setStatus(true);
-
     return SUCCESS_RET;
 }
 
-retcode_ BoostSharedMemory::update(DataPtr_ data) {
-    if (!this->getStatus()) {
-        return NOT_INITIALIZED;
-    }
-    if (this->getMode() != Server) {
-        return NOT_ALLOWED;
-    }
+retcode_ BoostSharedMemory::updateImpl_(DataPtr_ data) {
     // Copy the data to shared memory
     memcpy(regionMemory->get_address(), data, containerSize);
     return SUCCESS_RET;
 }
 
-retcode_ BoostSharedMemory::get(DataPtr_ data) {
-    if (!this->getStatus()) {
-        return NOT_INITIALIZED;
-    }
+retcode_ BoostSharedMemory::getImpl_(DataPtr_ data) {
     // Copy the data from shared memory
     memcpy(data, regionMemory->get_address(), containerSize);
     return SUCCESS_RET;
