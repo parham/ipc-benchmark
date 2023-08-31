@@ -13,6 +13,8 @@
 #define WRITING_FAILED 5
 #define READING_FAILED 6
 #define SOCKET_CREATION_FAILED 7
+#define STREAM_CREATION_FAILED 8
+#define PIPE_CREATION_FAILED 9
 
 typedef enum {
     Server,
@@ -33,11 +35,10 @@ public:
         status_(false),
         name_(std::move(title)),
         mode_(mode){}
-    ~AbstractIPC() = default;
 
     IPCMode getMode() {return mode_;}
     std::string getName() {return this->name_;}
-    [[nodiscard]] bool getStatus() const {return this->status_;}
+    bool getStatus() const {return this->status_;}
     void setStatus(bool status) {this->status_ = status;}
 
 public:
