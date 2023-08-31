@@ -29,8 +29,6 @@ int main (int argc, char* argv []) {
             obj = std::unique_ptr<AbstractIPC>(new NamedPipe("phm_test", IPCMode::Server, packetSize));
         } else if (method == "domain_socket") {
             obj = std::unique_ptr<AbstractIPC>(new UnixDomainSocket("phm_test", IPCMode::Server, packetSize));
-        } else if (method == "unnamed_pipe") {
-            obj = std::unique_ptr<AbstractIPC>(new UnnamedPipe("phm_test", IPCMode::Server, packetSize));
         }
         if ((sts = obj->initialize()) != SUCCESS_RET) {
             std::cerr << "SERVER: INITIALIZATION is failed" << std::endl;
@@ -55,8 +53,6 @@ int main (int argc, char* argv []) {
             obj = std::unique_ptr<AbstractIPC>(new NamedPipe("phm_test", IPCMode::Client, packetSize));
         } else if (method == "domain_socket") {
             obj = std::unique_ptr<AbstractIPC>(new UnixDomainSocket("phm_test", IPCMode::Client, packetSize));
-        } else if (method == "unnamed_pipe") {
-            obj = std::unique_ptr<AbstractIPC>(new UnnamedPipe("phm_test", IPCMode::Client, packetSize));
         }
         if ((sts = obj->initialize()) != SUCCESS_RET) {
             std::cerr << "CLIENT: INITIALIZATION is failed" << std::endl;

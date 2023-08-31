@@ -2,16 +2,16 @@
 #include "pipe.h"
 
 retcode_ UnnamedPipe::initializeImpl_() {
-    if (pipe(streamFD) < 0) {
-        return PIPE_CREATION_FAILED;
-    }
+//    if (pipe(streamFD) < 0) {
+//        return PIPE_CREATION_FAILED;
+//    }
     if (this->getMode() == IPCMode::Server) {
-        streamFILE = fdopen(streamFD[PIPE_SERVER], "w");
+        streamFILE = fdopen(streamFD, "w");
         if(streamFILE == nullptr) {
             return STREAM_CREATION_FAILED;
         }
     } else if (this->getMode() == IPCMode::Client) {
-        streamFILE = fdopen(streamFD[PIPE_CLIENT], "r");
+        streamFILE = fdopen(streamFD, "r");
         if(streamFILE == nullptr) {
             return STREAM_CREATION_FAILED;
         }
@@ -21,8 +21,7 @@ retcode_ UnnamedPipe::initializeImpl_() {
 }
 
 retcode_ UnnamedPipe::terminateImpl_() {
-    close(streamFD[PIPE_SERVER]);
-    close(streamFD[PIPE_CLIENT]);
+    close(streamFD);
     return SUCCESS_RET;
 }
 
