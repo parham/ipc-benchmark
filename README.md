@@ -1,3 +1,5 @@
+<img src="https://github.com/parham/parham.github.io/blob/main/assets/img/favicon.png"/>
+
 # Inter Process Communication (IPC) Benchmarking
 
 A comparative analysis of the selected IPC methods for embedded applications.
