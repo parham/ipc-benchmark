@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/parham/parham.github.io/blob/main/assets/img/favicon.png"/>
+  <img src="https://github.com/parham/parham.github.io/blob/main/assets/img/favicon.png"/ width="200">
 </div>
 
 # Inter Process Communication (IPC) Benchmarking
