@@ -1,4 +1,6 @@
-<img src="https://github.com/parham/parham.github.io/blob/main/assets/img/favicon.png"/>
+<div align="center">
+  <img src="https://github.com/parham/parham.github.io/blob/main/assets/img/favicon.png"/>
+</div>
 
 # Inter Process Communication (IPC) Benchmarking
 
